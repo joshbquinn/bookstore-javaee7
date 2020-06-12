@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.jbq.bookstore.repository.BookRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 6.958 s <<< FAILURE! - in com.jbq.bookstore.repository.BookRepositoryTest
+com.jbq.bookstore.repository.BookRepositoryTest  Time elapsed: 6.957 s  <<< ERROR!
+org.jboss.arquillian.container.spi.client.container.DeploymentException: Cannot deploy: test.war
+Caused by: java.net.ConnectException: Connection refused: no further information
+
