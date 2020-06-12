@@ -2,7 +2,6 @@ package com.jbq.bookstore.repository;
 
 import com.jbq.bookstore.model.Book;
 import com.jbq.bookstore.model.Language;
-import junit.framework.TestCase;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -12,7 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 import java.rmi.server.UID;
 import java.util.Date;
@@ -25,14 +23,30 @@ public class BookRepositoryTest {
     @Inject
     private BookRepository bookRepository;
 
+    private Date date = new Date();
+    private Date date2 = new Date();
+
+
+    @Test(expected = Exception.class)
+    public void findWithInvalidId(){
+        bookRepository.find(null);
+    }
+
+    @Test(expected = Exception.class)
+    public void createInvalidBook(){
+
+        Book book = new Book(new UID(), null, 12f, 123,
+                Language.ENGLISH, new Date(), "http://www.blahlah.com", "description");
+        book = bookRepository.create(book);
+    }
+
     @Test
     public void create() throws Exception {
         assertEquals(Long.valueOf(0), bookRepository.countAll());
         assertEquals(0, bookRepository.findAll().size());
-
         // Create a book
         Book book = new Book(new UID(), "A Title", 12f, 123,
-                Language.ENGLISH, new Date(), "http://www.blahlah.com", "description");
+                Language.ENGLISH, date, "http://www.blahlah.com", "description");
         book = bookRepository.create(book);
 
         // Check created book by id
@@ -63,17 +77,11 @@ public class BookRepositoryTest {
 
         // Create a book
         Book book = new Book(new UID(), "A Title", 12f, 123,
-                Language.ENGLISH, new Date(), "http://www.blahlah.com", "description");
+                Language.ENGLISH, date2, "http://www.blahlah.com", "description");
         book = bookRepository.create(book);
-
-        System.out.println(book.toString());
 
         // Delete a book
         bookRepository.delete(book.getId());
-
-        // Assert a book has been persisted
-        assertEquals(Long.valueOf(0), bookRepository.countAll());
-        assertEquals(0, bookRepository.findAll().size());
 
     }
 
