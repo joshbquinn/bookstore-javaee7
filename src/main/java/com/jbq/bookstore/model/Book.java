@@ -5,7 +5,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
-import java.rmi.server.UID;
 import java.util.Date;
 
 @Entity
@@ -27,8 +26,10 @@ public class Book {
     @Min(1)
     private Float unitCost;
 
+    @Column(length = 50)
     @NotNull
-    private UID isbn;
+    @Size(min=1,max=50)
+    private String isbn;
 
     @Column(name = "publication_date")
     @Temporal(TemporalType.DATE)
@@ -47,7 +48,7 @@ public class Book {
 
     }
 
-    public Book(UID isbn, String title, float unitcost, int nbOfPages,
+    public Book(String isbn, String title, float unitcost, int nbOfPages,
                 Language language, Date date, String imageUrl, String description) {
         this.isbn = isbn;
         this.title = title;
@@ -93,11 +94,11 @@ public class Book {
         this.unitCost = unitCost;
     }
 
-    public UID getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(UID isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
