@@ -16,7 +16,9 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 
 import java.rmi.server.UID;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static org.junit.Assert.*;
 
@@ -26,8 +28,6 @@ public class BookRepositoryTest {
     @Inject
     private BookRepository bookRepository;
 
-    private Date date = new Date();
-    private Date date2 = new Date();
 
 
     @Test(expected = Exception.class)
@@ -47,6 +47,9 @@ public class BookRepositoryTest {
     public void create() throws Exception {
         assertEquals(Long.valueOf(0), bookRepository.countAll());
         assertEquals(0, bookRepository.findAll().size());
+
+        Date date = new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
+
         // Create a book
         Book book = new Book("isbn", "A  Title", 12f, 123,
                 Language.ENGLISH, date, "http://www.blahlah.com", "description");
@@ -77,9 +80,11 @@ public class BookRepositoryTest {
         assertEquals(Long.valueOf(0), bookRepository.countAll());
         assertEquals(0, bookRepository.findAll().size());
 
+        Date date = new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
+
         // Create a book
         Book book = new Book("isbn", "A Title", 12f, 123,
-                Language.ENGLISH, date2, "http://www.blahlah.com", "description");
+                Language.ENGLISH, date, "http://www.blahlah.com", "description");
         book = bookRepository.create(book);
 
         // Delete a book

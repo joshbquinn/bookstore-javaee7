@@ -10,13 +10,12 @@
     <packaging>war</packaging>
 
     <name>bookstore-back</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.java>1.8</version.java>
         <version.javaee>7.0</version.javaee>
-        <!--Test-->
+        <!-- Test -->
         <version.junit>4.12</version.junit>
         <version.arquillian>1.4.1.Final</version.arquillian>
         <version.arquillian.wildfly>2.1.1.Final</version.arquillian.wildfly>
@@ -46,7 +45,7 @@
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
+            <version>${version.javaee}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -90,6 +89,7 @@
 
     <build>
         <finalName>bookstore-back</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -104,10 +104,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>${version.compiler.plugin}</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>${version.java}</source>
+                    <target>${version.java}</target>
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
@@ -116,7 +116,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.3</version>
+                <version>${version.war.plugin}</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
@@ -124,7 +124,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.6</version>
+                <version>${version.dependency.plugin}</version>
                 <executions>
                     <execution>
                         <phase>validate</phase>
@@ -138,7 +138,7 @@
                                 <artifactItem>
                                     <groupId>javax</groupId>
                                     <artifactId>javaee-endorsed-api</artifactId>
-                                    <version>7.0</version>
+                                    <version>${version.javaee}</version>
                                     <type>jar</type>
                                 </artifactItem>
                             </artifactItems>
@@ -149,7 +149,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${version.assembly.plugin}</version>
                 <configuration>
                     <descriptorRefs>
                         <descriptorRef>src</descriptorRef>
@@ -158,5 +158,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

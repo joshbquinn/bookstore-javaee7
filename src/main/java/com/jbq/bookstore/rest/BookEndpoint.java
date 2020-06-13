@@ -60,7 +60,7 @@ public class BookEndpoint {
     public Response countBooks() {
         Long nbOfBooks = bookRepository.countAll();
         if (nbOfBooks != 0)
-            return Response.ok("\nNumber of books: " + nbOfBooks).build();
+            return Response.ok(nbOfBooks).build();
         return Response.noContent().build();
     }
 

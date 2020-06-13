@@ -40,7 +40,7 @@ public class Book {
     private Integer nbOfPages;
 
     @Column(name = "image_url")
-    private String imageUrl;
+    private String imageURL;
 
     private Language language;
 
@@ -48,15 +48,25 @@ public class Book {
 
     }
 
+    public Book(String isbn, String title, Float unitCost, Integer nbOfPages, Language language, String imageURL, String description) {
+        this.isbn = isbn;
+        this.title = title;
+        this.unitCost = unitCost;
+        this.nbOfPages = nbOfPages;
+        this.language = language;
+        this.imageURL = imageURL;
+        this.description = description;
+    }
+
     public Book(String isbn, String title, float unitcost, int nbOfPages,
-                Language language, Date date, String imageUrl, String description) {
+                Language language, Date date, String imageURL, String description) {
         this.isbn = isbn;
         this.title = title;
         this.unitCost = unitcost;
         this.nbOfPages = nbOfPages;
         this.language = language;
         this.publicationDate = date;
-        this.imageUrl = imageUrl;
+        this.imageURL = imageURL;
         this.description = description;
 
     }
@@ -118,12 +128,12 @@ public class Book {
         this.nbOfPages = nbOfPages;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageURL(String imageUrl) {
+        this.imageURL = imageUrl;
     }
 
     public Language getLanguage() {
@@ -144,7 +154,7 @@ public class Book {
                 ", isbn=" + isbn +
                 ", publicationDate=" + publicationDate +
                 ", nbOfPages=" + nbOfPages +
-                ", imageUrl='" + imageUrl + '\'' +
+                ", imageUrl='" + imageURL + '\'' +
                 ", language=" + language +
                 '}';
     }
