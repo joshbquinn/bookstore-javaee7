@@ -36,7 +36,7 @@ public class Book {
     @Past
     private Date publicationDate;
 
-    @Column(name = "number_of_pages")
+    @Column(name = "nb_of_pages")
     private Integer nbOfPages;
 
     @Column(name = "image_url")
