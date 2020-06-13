@@ -1,0 +1,177 @@
+---
+swagger: "2.0"
+info:
+  description: "BookStore APIs exposed from a Java EE back-end to an Angular front-end"
+  version: "1.0.0"
+  title: "BookStore APIs"
+  contact:
+    name: "Josh Quinn"
+    url: "https://github.com/joshbquinn/bookstore-javaee7"
+    email: "joshbquinn@gmail.com"
+host: "localhost:8080"
+basePath: "/bookstore-back/api"
+tags:
+- name: "Books"
+schemes:
+- "http"
+- "https"
+paths:
+  /books:
+    get:
+      tags:
+      - "Books"
+      summary: "Returns all books in database"
+      description: ""
+      operationId: "getBooks"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Books found"
+          schema:
+            $ref: "#/definitions/Book"
+        204:
+          description: "No books"
+    post:
+      tags:
+      - "Books"
+      summary: "Creates a book given a JSON Book representation"
+      description: ""
+      operationId: "createBook"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Book"
+        201:
+          description: "Book created"
+        415:
+          description: "Format Exception"
+  /books/count:
+    get:
+      tags:
+      - "Books"
+      summary: "Returns the total number of books "
+      description: ""
+      operationId: "countBooks"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Number returned"
+          schema:
+            $ref: "#/definitions/Book"
+        204:
+          description: "No books"
+  /books/{id}:
+    get:
+      tags:
+      - "Books"
+      summary: "Returns a book given an identifier"
+      description: ""
+      operationId: "getBook"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "integer"
+        minimum: 1
+        pattern: "\\d+"
+        format: "int64"
+      responses:
+        200:
+          description: "Book found"
+          schema:
+            $ref: "#/definitions/Book"
+        400:
+          description: "Invalid book"
+        404:
+          description: "Book not found"
+    delete:
+      tags:
+      - "Books"
+      summary: "Deletes a book given an id"
+      description: ""
+      operationId: "deleteBook"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "integer"
+        minimum: 1
+        pattern: "\\d+"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Book"
+        204:
+          description: "Book deleted"
+        400:
+          description: "Invalid book"
+        500:
+          description: "Book not found"
+definitions:
+  Book:
+    type: "object"
+    required:
+    - "isbn"
+    - "title"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        description: "Identifier"
+      title:
+        type: "string"
+        description: "Title of the book"
+        minLength: 1
+        maxLength: 200
+      description:
+        type: "string"
+        description: "Description of the book"
+        minLength: 1
+        maxLength: 10000
+      unitCost:
+        type: "number"
+        format: "float"
+        description: "Unit cot of the book"
+        minimum: 1
+      isbn:
+        type: "string"
+        description: "Book unique ISBN"
+        minLength: 1
+        maxLength: 50
+      publicationDate:
+        type: "string"
+        format: "date-time"
+        description: "The publication date of the book"
+      nbOfPages:
+        type: "integer"
+        format: "int32"
+        description: "Number of pages the book has"
+      imageURL:
+        type: "string"
+        description: "Image URL of the book"
+      language:
+        type: "string"
+        description: "Language of the book"
+        enum:
+        - "ENGLISH"
+        - "FRENCH"
+        - "SPANISH"
+        - "PORTUGUESE"
+        - "FINISH"
+        - "GERMAN"
+        - "DUTCH"
+        - "RUSSIAN"
+        - "ITALIAN"
+    description: "Book resource representation"
